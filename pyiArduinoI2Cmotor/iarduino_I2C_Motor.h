@@ -11,13 +11,15 @@
 #ifndef iarduino_I2C_Motor_h																						//
 #define iarduino_I2C_Motor_h																						//
 																													//
+/*
 #if defined(ARDUINO) && (ARDUINO >= 100)																			//
 #include		<Arduino.h>																							//
 #else																												//
 #include		<WProgram.h>																						//
 #endif																												//
+*/
 																													//
-#include		<iarduino_I2C_Motor_I2C.h>																			//	Подключаем файл iarduino_I2C_Motor_I2C.h - для работы с шиной I2C		(используя функции структуры iI2C)
+#include		"iarduino_I2C_PI.h"																			//	Подключаем файл iarduino_I2C_Motor_I2C.h - для работы с шиной I2C		(используя функции структуры iI2C)
 																													//
 #define			DEF_CHIP_ID_FLASH		0x3C																		//	ID линейки чипов - константа для всех чипов серии Flash (позволяет идентифицировать принадлежность чипа к серии).
 #define			DEF_CHIP_ID_METRO		0xC3																		//	ID линейки чипов - константа для всех чипов серии Metro (позволяет идентифицировать принадлежность чипа к серии).
@@ -85,7 +87,7 @@
 #endif																												//
 																													//
 #ifndef			MOT_SEC																								//	Параметр информирубщий о том, что значение указано в СЕКУНДАХ.
-#define			MOT_SEC					4																			//	setStop(длительность, MOT_SEC); getStop(MOT_SEC); setSpeed(скорость, MOT_RPM/MOT_PWM, длительность, MOT_SEC); 
+#define			MOT_SEC					4																			//	setStop(длительность, MOT_SEC); getStop(MOT_SEC); setSpeed(скорость, MOT_RPM/MOT_PWM, длительность, MOT_SEC);
 #endif																												//
 																													//
 #ifndef			MOT_M_S																								//	Параметр информирубщий о том, что значение указано в МЕТРАХ В СЕКУНДУ.
