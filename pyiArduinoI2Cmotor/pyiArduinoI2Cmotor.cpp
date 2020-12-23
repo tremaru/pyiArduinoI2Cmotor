@@ -2833,7 +2833,7 @@ static PyObject *__pyx_pf_18pyiArduinoI2Cmotor_18pyiArduinoI2Cmotor_18pyiArduino
  *     def getSpeed(self, typ):
  *         return self.c_module.getSpeed(typ)             # <<<<<<<<<<<<<<
  * 
- *     def setStop(self, val, typ=None):
+ *     def setStop(self, val=None, typ=None):
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = __Pyx_PyInt_As_unsigned_char(__pyx_v_typ); if (unlikely((__pyx_t_1 == (unsigned char)-1) && PyErr_Occurred())) __PYX_ERR(0, 158, __pyx_L1_error)
@@ -2865,8 +2865,8 @@ static PyObject *__pyx_pf_18pyiArduinoI2Cmotor_18pyiArduinoI2Cmotor_18pyiArduino
 /* "pyiArduinoI2Cmotor/pyiArduinoI2Cmotor.pyx":160
  *         return self.c_module.getSpeed(typ)
  * 
- *     def setStop(self, val, typ=None):             # <<<<<<<<<<<<<<
- *         if typ is not None:
+ *     def setStop(self, val=None, typ=None):             # <<<<<<<<<<<<<<
+ *         if val is not None:
  *             return self.c_module.setStop(val, typ)
  */
 
@@ -2881,6 +2881,7 @@ static PyObject *__pyx_pw_18pyiArduinoI2Cmotor_18pyiArduinoI2Cmotor_18pyiArduino
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_val,&__pyx_n_s_typ,0};
     PyObject* values[2] = {0,0};
+    values[0] = ((PyObject *)Py_None);
     values[1] = ((PyObject *)Py_None);
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
@@ -2896,8 +2897,10 @@ static PyObject *__pyx_pw_18pyiArduinoI2Cmotor_18pyiArduinoI2Cmotor_18pyiArduino
       kw_args = PyDict_Size(__pyx_kwds);
       switch (pos_args) {
         case  0:
-        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_val)) != 0)) kw_args--;
-        else goto __pyx_L5_argtuple_error;
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_val);
+          if (value) { values[0] = value; kw_args--; }
+        }
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
@@ -2913,7 +2916,8 @@ static PyObject *__pyx_pw_18pyiArduinoI2Cmotor_18pyiArduinoI2Cmotor_18pyiArduino
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
         CYTHON_FALLTHROUGH;
         case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-        break;
+        CYTHON_FALLTHROUGH;
+        case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
     }
@@ -2922,7 +2926,7 @@ static PyObject *__pyx_pw_18pyiArduinoI2Cmotor_18pyiArduinoI2Cmotor_18pyiArduino
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("setStop", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 160, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("setStop", 0, 0, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 160, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pyiArduinoI2Cmotor.pyiArduinoI2Cmotor.pyiArduinoI2Cmotor.setStop", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2947,18 +2951,18 @@ static PyObject *__pyx_pf_18pyiArduinoI2Cmotor_18pyiArduinoI2Cmotor_18pyiArduino
 
   /* "pyiArduinoI2Cmotor/pyiArduinoI2Cmotor.pyx":161
  * 
- *     def setStop(self, val, typ=None):
- *         if typ is not None:             # <<<<<<<<<<<<<<
+ *     def setStop(self, val=None, typ=None):
+ *         if val is not None:             # <<<<<<<<<<<<<<
  *             return self.c_module.setStop(val, typ)
  *         else:
  */
-  __pyx_t_1 = (__pyx_v_typ != Py_None);
+  __pyx_t_1 = (__pyx_v_val != Py_None);
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
     /* "pyiArduinoI2Cmotor/pyiArduinoI2Cmotor.pyx":162
- *     def setStop(self, val, typ=None):
- *         if typ is not None:
+ *     def setStop(self, val=None, typ=None):
+ *         if val is not None:
  *             return self.c_module.setStop(val, typ)             # <<<<<<<<<<<<<<
  *         else:
  *             return self.c_module.setStopOverloaded()
@@ -2974,8 +2978,8 @@ static PyObject *__pyx_pf_18pyiArduinoI2Cmotor_18pyiArduinoI2Cmotor_18pyiArduino
 
     /* "pyiArduinoI2Cmotor/pyiArduinoI2Cmotor.pyx":161
  * 
- *     def setStop(self, val, typ=None):
- *         if typ is not None:             # <<<<<<<<<<<<<<
+ *     def setStop(self, val=None, typ=None):
+ *         if val is not None:             # <<<<<<<<<<<<<<
  *             return self.c_module.setStop(val, typ)
  *         else:
  */
@@ -3000,8 +3004,8 @@ static PyObject *__pyx_pf_18pyiArduinoI2Cmotor_18pyiArduinoI2Cmotor_18pyiArduino
   /* "pyiArduinoI2Cmotor/pyiArduinoI2Cmotor.pyx":160
  *         return self.c_module.getSpeed(typ)
  * 
- *     def setStop(self, val, typ=None):             # <<<<<<<<<<<<<<
- *         if typ is not None:
+ *     def setStop(self, val=None, typ=None):             # <<<<<<<<<<<<<<
+ *         if val is not None:
  *             return self.c_module.setStop(val, typ)
  */
 

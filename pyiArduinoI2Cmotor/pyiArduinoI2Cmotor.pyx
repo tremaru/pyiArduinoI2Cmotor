@@ -157,8 +157,8 @@ cdef class pyiArduinoI2Cmotor:
     def getSpeed(self, typ):
         return self.c_module.getSpeed(typ)
 
-    def setStop(self, val, typ=None):
-        if typ is not None:
+    def setStop(self, val=None, typ=None):
+        if val is not None:
             return self.c_module.setStop(val, typ)
         else:
             return self.c_module.setStopOverloaded()
