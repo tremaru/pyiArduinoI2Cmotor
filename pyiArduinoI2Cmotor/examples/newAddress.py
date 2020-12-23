@@ -1,6 +1,6 @@
 # ПРИМЕР СМЕНЫ АДРЕСА МОДУЛЯ:
 
-# Подключаем библиотеку для работы с датчиком температуры и влажности
+# Подключаем библиотеку для работы с модул ем температуры и влажности
 from pyiArduinoI2Cmotor import *
 import sys
 
@@ -19,9 +19,9 @@ else:
     # Новый адрес - первый аргумент
     newAddress = int(sys.argv[1])
 
-# Если датчик найден
+# Если модуль найден
 if module.begin():
-    print("Найден датчик %#.2x" % module.getAddress())
+    print("Найден модуль %#.2x" % module.getAddress())
 
     # Если адрес удалось изменить
     if module.changeAddress(newAddress):
@@ -31,4 +31,4 @@ if module.begin():
             print("Адрес не изменён!")
 
 else:
-    print("Датчик не найден!")
+    print("Модуль не найден!")
