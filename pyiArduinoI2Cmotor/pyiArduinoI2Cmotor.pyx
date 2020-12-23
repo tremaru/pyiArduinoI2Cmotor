@@ -127,76 +127,86 @@ cdef class pyiArduinoI2Cmotor:
         else:
             return self.c_module.setPullI2C(True)
 
-    def setFreqPWM(freq):
+    def setFreqPWM(self, freq):
         return self.c_module.setFreqPWM(freq)
 
-    def setMagnet(num):
+    def setMagnet(self, num):
         return self.c_module.setMagnet(num)
 
-    def getMagnet():
+    def getMagnet(self):
         return self.c_module.getMagnet()
 
-    def setReducer(gear):
+    def setReducer(self, gear):
         return self.c_module.setReducer(gear)
 
-    def getReducer():
+    def getReducer(self):
         return self.c_module.getReducer()
 
-    def setError(dev):
+    def setError(self, dev):
         return self.c_module.setError(dev)
 
-    def getError():
+    def getError(self):
         return self.c_module.getError()
 
-    def setSpeed(valSpeed, typeSpeed, valStop=None, typeStop=None):
+    def setSpeed(self, valSpeed, typeSpeed, valStop=None, typeStop=None):
         if valStop is not None:
             return self.c_module.setSpeed(valSpeed, typeSpeed, valStop, typeStop)
         else:
             return self.c_module.setSpeedOverloaded(valSpeed, typeSpeed)
 
-    def getSpeed(typ):
+    def getSpeed(self, typ):
         return self.c_module.getSpeed(typ)
 
-    def setStop(val, typ):
-        return self.c_module.setStop(val, typ)
+    def setStop(self, val, typ=None):
+        if typ is not None:
+            return self.c_module.setStop(val, typ)
+        else:
+            return self.c_module.setStopOverloaded()
 
-    def setStop #!(
-    def getStop(typ):
+    def getStop(self, typ):
         return self.c_module.getStop(typ)
 
-    def setStopNeutral(f):
+    def setStopNeutral(self, f):
         return self.c_module.setStopNeutral(f)
 
-    def getStopNeutral():
+    def getStopNeutral(self):
         return self.c_module.getStopNeutral()
 
-    def setDirection(flgCKW):
+    def setDirection(self, flgCKW):
         return self.c_module.setDirection(flgCKW)
 
-    def getDirection():
+    def getDirection(self):
         return self.c_module.getDirection()
 
-    def setInvGear(invRDR, invPIN):
+    def setInvGear(self, invRDR, invPIN):
         return self.c_module.setInvGear(invRDR, invPIN)
 
-    def getInvGear():
+    def getInvGear(self):
         return self.c_module.getInvGear()
 
-    def getSum(typ):
+    def getSum(self, typ):
         return self.c_module.getSum(typ)
 
-    def delSum(
-    def setVoltage(volt):
-        return self.c_module.setVoltage()
+    def delSum(self):
+        return self.c_module.delSum()
 
-    def getVoltage():
+    def setVoltage(self, volt):
+        return self.c_module.setVoltage(volt)
+
+    def getVoltage(self):
         return self.c_module.getVoltage()
 
-    def setNominalRPM(val):
+    def setNominalRPM(self, val):
         return self.c_module.setNominalRPM(val)
 
-    def getNominalRPM():
+    def getNominalRPM(self):
         return self.c_module.getNominalRPM()
 
-    def saveManufacturer(code):
+    def saveManufacturer(self, code):
         return self.c_module.saveManufacturer(code)
+
+    property radius:
+        def __get__(self):
+            return self.c_module.radius
+        def __set__(self, float var):
+            self.c_module.radius = var

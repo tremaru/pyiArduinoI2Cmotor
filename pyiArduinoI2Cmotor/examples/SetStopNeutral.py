@@ -1,6 +1,9 @@
-# ПРИМЕР ОСТАНАВЛИВАЕТ МОТОР С БЛОКИРОВКОЙ И БЕЗ #
-                                                  #
-from pyiArduinoI2Cmotor import *                  #   Подключаем библиотеку для работы с мотором I2C-flash.
+# ПРИМЕР ОСТАНАВЛИВАЕТ МОТОР С БЛОКИРОВКОЙ И БЕЗ
+
+from time import sleep
+
+#   Подключаем библиотеку для работы с мотором I2C-flash.
+from pyiArduinoI2Cmotor import *
 mot = pyiArduinoI2Cmotor(0x09)                    #   Объявляем объект mot для работы с функциями и методами библиотеки pyiArduinoI2Cmotor, указывая адрес модуля на шине I2C.
                                                   #   Если объявить объект без указания адреса (mot = pyiArduinoI2Cmotor ), то адрес будет найден автоматически.
 while True:

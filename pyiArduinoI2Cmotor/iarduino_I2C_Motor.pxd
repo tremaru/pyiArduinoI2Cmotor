@@ -38,3 +38,4 @@ cdef extern from "iarduino_I2C_Motor.h":
         bint  setNominalRPM(unsigned short)
         unsigned short getNominalRPM()
         bint saveManufacturer(unsigned long)
+        float radius
