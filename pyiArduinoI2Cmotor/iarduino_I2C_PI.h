@@ -3,6 +3,7 @@
 #define delay(A) usleep(A*1000)
 #define delayMicroseconds(A) usleep(A)
 #define bit(b) (1UL << (b))
+#define millis() std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()
 #include <unistd.h>                     // Подключаем библиотеку unistd, для получения доступа к POSIX API
 #include <fcntl.h>                      // Подключаем библиотеку доступа к файлам
 #include <sys/ioctl.h>                  // Подключаем библиотеку контроля входов/выходов

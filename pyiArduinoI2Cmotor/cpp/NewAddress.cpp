@@ -16,9 +16,9 @@ int main(int argc, char** argv){
 
         if (module.begin()){
 
-                std::cout << "На шине I2C найден модуль с адресом 0x";
+                std::cout << "На шине I2C найден мотор 0x";
                 std::cout << std::hex << int(module.getAddress());
-                std::cout << " который является расширителем выводов\n";
+                std::cout << "\n";
 
                 if (module.changeAddress(newAddress)){
 

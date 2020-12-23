@@ -10,6 +10,7 @@
 
 #ifndef iarduino_I2C_Motor_h																						//
 #define iarduino_I2C_Motor_h																						//
+//#define PI 3.14195
 																													//
 /*
 #if defined(ARDUINO) && (ARDUINO >= 100)																			//
