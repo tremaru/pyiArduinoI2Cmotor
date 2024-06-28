@@ -10,76 +10,16 @@
 #include <linux/i2c-dev.h>              // Подключаем библиотеку для работы с шиной i2c
 #include <stdint.h>                     // Подключаем библиотеку с макросами целочисленных типов
 #include <chrono>
+#include <string>
 
-//  Определяем полиморфный класс
-class iarduino_I2C_BASE{
-        public:
-//  ОСНОВНЫЕ ФУНКЦИИ:
-                //  Аргумет не используется, нужен для совместимости
-                virtual void begin(uint32_t){};
-
-                //  Аргументы: адрес_модуля, адрес_регистра.
-                // (адрес регистра указывает модулю,
-                // данные какого регистра требуется отправить мастеру)
-                virtual uint8_t readByte(uint8_t, uint8_t)
-                {return 0;};
-
-                //  Аргументы: адрес_модуля, адрес_регистра, байт_данных.
-                // (адрес регистра указывает модулю, в какой регистр
-                // требуется сохранить данные)
-                virtual bool writeByte(uint8_t, uint8_t, uint8_t)
-                {return 0;};
-
-                //  Аргументы: адрес_модуля  (функция отличается тем,
-                // что она не отправляет модулю адрес регистра)
-                virtual uint8_t readByte(uint8_t){return 0;};
-
-                //  Аргументы: адрес_модуля, байт_данных.
-                // (функция отличается тем, что она
-                // не отправляет модулю адрес регистра)
-                virtual bool writeByte(uint8_t, uint8_t){return 0;};
-
-                //  Аргументы: адрес_модуля, адрес_первого_регистра,
-                // указатель_на_массив, количество_байт.
-                // (адрес первого регистра указывает модулю,
-                // с какого регистра требуется начать передачу данных мастеру)
-                virtual bool readBytes(uint8_t, uint8_t, uint8_t*, uint8_t)
-                {return 0;};
-
-                //  Аргументы: адрес_модуля, адрес_первого_регистра,
-                // указатель_на_массив, количество_байт.
-                // (адрес первого регистра указывает модулю,
-                // начиная с какого регистра требуется сохранять данные)
-                virtual bool writeBytes(uint8_t, uint8_t, uint8_t*, uint8_t)
-                {return 0;};
-
-                //  Аргументы: адрес_модуля, указатель_на_массив, количество_байт.
-                // (функция отличается тем, что она не отправляет модулю адрес
-                // первого регистра, а начинает цикл чтения сразу после отправки
-                // адреса модуля.)
-                virtual bool readBytes(uint8_t, uint8_t*, uint8_t)  {return 0;};
-
-                //  Аргументы: адрес_модуля, указатель_на_массив,
-                // количество_байт. (функция отличается тем, что после
-                // отправки адреса модуля она сразу начинает цикл отправки
-                // данных, без передачи адреса первого регистра.)
-                virtual bool writeBytes(uint8_t, uint8_t*, uint8_t){return 0;};
-
-//  ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ:
-                //  Аргументы: адрес_модуля.
-                virtual bool checkAddress(uint8_t){return 0;};
-                virtual void changeBus(char*){};
-};
-
-//  Определяем производный класс
-class iarduino_I2C: public iarduino_I2C_BASE{
+class iarduino_I2C {
         public:
 
 /**  ОСНОВНЫЕ ФУНКЦИИ: **/
 
 //      Функция подготовки шины I2C:
                 //  Аргумент: скорость шины в кГц (не используется, задать
-                // скорость можно только в файле /boot/config.txt с
+                // скорость можно только в файле /boot/firmware/config.txt с
                 // последующей перезагрузкой, что находится за пределами
                 // данной библеотеки).
                 void begin(uint32_t speed)
@@ -88,7 +28,7 @@ class iarduino_I2C: public iarduino_I2C_BASE{
                         // ревизии 2.0 (выпущена после 2012 года) - i2c-1,
                         // если ревизия 1.0 - i2c-0. Узнать номер шины можно
                         // вызвав ls /dev в консоли.
-                        if((file_i2c = open(filename, O_RDWR))<0) return;
+                        if((file_i2c = open(filename.c_str(), O_RDWR))<0) return;
                 }
 
 //      Функция чтения одного байта из регистра модуля:
@@ -121,16 +61,16 @@ class iarduino_I2C: public iarduino_I2C_BASE{
 //      Функция пакетного чтения нескольких байт данных из регистров модуля:
 
                 // аргументы: адрес_модуля, адрес_первого_регистра, указатель_на_массив, количество_байт
-                bool readBytes(uint8_t addr, uint8_t reg, uint8_t *data, uint8_t sum)
+/*              bool readBytes(uint8_t addr, uint8_t reg, uint8_t *data, uint8_t sum)
                 {
                         if (ioctl(file_i2c, I2C_SLAVE, addr) < 0) return false;
                         else if ((write(file_i2c, &reg, 1) != 1)) return false;
                         else if (read(file_i2c, data, sum) != sum) return false;
                         else return true;
                 }
-
+*/
                 // аргументы: адрес_модуля, адрес_первого_регистра, указатель_на_массив, количество_байт
-/*                bool readBytes(uint8_t addr, uint8_t reg, uint8_t *data, uint8_t sum)
+                bool readBytes(uint8_t addr, uint8_t reg, uint8_t *data, uint8_t sum)
                 {
                         if (ioctl(file_i2c, I2C_SLAVE, addr) < 0) return false;
                         else if ((write(file_i2c, &reg, 1) != 1)) return false;
@@ -138,7 +78,7 @@ class iarduino_I2C: public iarduino_I2C_BASE{
                         if (read(file_i2c, data, sum) != sum) return false;
                         else return true;
                 }
-*/
+
 //      Функция пакетного чтения нескольких байт данных из модуля:
                 // аргументы: адрес_модуля, указатель_на_массив, количество_байт
                 bool readBytes(uint8_t addr, uint8_t *data, uint8_t sum)
@@ -184,11 +124,12 @@ class iarduino_I2C: public iarduino_I2C_BASE{
                         else return true;
                 }
 
-                void changeBus(char* bus){
-                        this->filename = bus;
+                void changeBus(std::string bus){
+                        filename = bus;
                 }
+
         private:
-                char *filename = (char*)"/dev/i2c-1";
+		std::string filename = "/dev/i2c-1";
                 int file_i2c;
 };
 #endif

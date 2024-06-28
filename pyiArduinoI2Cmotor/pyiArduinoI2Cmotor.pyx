@@ -71,11 +71,14 @@ NO_BEGIN = 1
 cdef class pyiArduinoI2Cmotor:
     cdef iarduino_I2C_Motor c_module
 
-    def __cinit__(self, address=None, auto=None):
+    def __cinit__(self, address=None, auto=None, bus=None):
 
         if address is not None:
 
             self.c_module = iarduino_I2C_Motor(address)
+
+            if bus is not None:
+                self.changeBus(bus)
 
             if auto is None:
                 #sleep(.5)
@@ -91,6 +94,9 @@ cdef class pyiArduinoI2Cmotor:
         else:
 
             self.c_module = iarduino_I2C_Motor()
+
+            if bus is not None:
+                self.changeBus(bus)
 
             if auto is None:
                 #sleep(.5)
@@ -204,6 +210,9 @@ cdef class pyiArduinoI2Cmotor:
 
     def saveManufacturer(self, code):
         return self.c_module.saveManufacturer(code)
+
+    def changeBus(self, bus):
+        self.c_module.changeBus(bytes(bus, 'utf-8'))
 
     property radius:
         def __get__(self):

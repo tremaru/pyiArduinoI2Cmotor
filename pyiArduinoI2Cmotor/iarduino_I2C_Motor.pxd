@@ -1,3 +1,5 @@
+from libcpp.string cimport string
+
 cdef extern from "iarduino_I2C_Motor.cpp":
     pass
 
@@ -39,3 +41,4 @@ cdef extern from "iarduino_I2C_Motor.h":
         unsigned short getNominalRPM()
         bint saveManufacturer(unsigned long)
         float radius
+        void changeBus(string)
